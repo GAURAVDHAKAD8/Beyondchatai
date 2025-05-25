@@ -42,7 +42,7 @@ const ChatContainer = () => {
   return (
     <div className="w-full h-full flex-col flex">
       {/* Header */}
-      <div className="bg-white shadow-[0_2px_8px_0_#E4E4E4] p-2 sm:p-3 flex flex-col sm:flex-row justify-between items-center mt-1/2 font-bold z-10 w-full">
+      <div className="bg-white shadow-[0_2px_8px_0_#E4E4E4] p-2 sm:p-3 flex flex-col sm:flex-row justify-between items-center mt-1 font-bold z-10 w-full">
         <h1 className="text-[15px] sm:text-[18px] w-full sm:w-auto text-center sm:text-left mb-2 sm:mb-0">
           Your inbox
         </h1>
