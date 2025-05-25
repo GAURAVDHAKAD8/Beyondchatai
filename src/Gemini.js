@@ -10,7 +10,6 @@ const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({
   model: "gemini-2.0-flash",
 });
-console.log("API Key from env:", import.meta.env.VITE_GEMINI_AI_KEY);
 
 
 const generationConfig = {
