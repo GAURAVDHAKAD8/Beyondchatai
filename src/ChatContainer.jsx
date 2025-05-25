@@ -71,10 +71,10 @@ const ChatContainer = () => {
         {/* Sidebar */}
         <div className="w-full lg:w-[25%] lg:min-w-[250px] lg:max-w-[350px] p-4 overflow-auto bg-gray-50 border-r sm:h-full h-[32%] border-gray-200 flex flex-col">
           <div className="mb-4 flex gap-1">
-            <button className="cursor-pointer font-bold text-[14px] px-3 rounded flex items-center gap-1 hover:bg-gray-300">
+            <button className="cursor-pointer font-bold text-[13px] px-3 rounded flex items-center gap-1 hover:bg-gray-300">
               5 open
             </button>
-            <button className="cursor-pointer font-bold text-[14px] px-3 rounded flex items-center gap-1 hover:bg-gray-300">
+            <button className="cursor-pointer font-bold text-[13px] px-3 rounded flex items-center gap-1 hover:bg-gray-300">
               working location
             </button>
           </div>

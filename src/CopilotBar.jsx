@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import run from "./Gemini"; 
+import run from "./Gemini";
 
 const CopilotBar = () => {
   const [question, setQuestion] = useState("");
@@ -8,7 +8,8 @@ const CopilotBar = () => {
   const messagesEndRef = useRef(null);
   const [activeTab, setActiveTab] = useState("copilot");
 
-  
+  const presetQuestion = "How do I get a refund?";
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -22,6 +23,24 @@ const CopilotBar = () => {
 
     try {
       const aiResponse = await run(question);
+      setMessages((prev) => [...prev, { sender: "ai", text: aiResponse }]);
+    } catch (error) {
+      setMessages((prev) => [
+        ...prev,
+        { sender: "ai", text: "Oops! Something went wrong. Please try again." },
+      ]);
+      console.error(error);
+    }
+    setLoading(false);
+  };
+
+  const handlePresetQuestion = async () => {
+
+    setMessages((prev) => [...prev, { sender: "user", text: presetQuestion }]);
+    setLoading(true);
+
+    try {
+      const aiResponse = await run(presetQuestion);
       setMessages((prev) => [...prev, { sender: "ai", text: aiResponse }]);
     } catch (error) {
       setMessages((prev) => [
@@ -100,12 +119,10 @@ const CopilotBar = () => {
       {/* Chat Messages Area */}
       <div
         className="flex-1  w-full max-w-md mx-auto overflow-y-auto px-4 py-6 space-y-4"
-        style={{ marginTop: "80px" }} 
+        style={{ marginTop: "80px" }}
       >
         {messages.length === 0 && (
-          <div className="text-gray-600 text-left">
-           
-          </div>
+          <div className="text-gray-600 text-left"></div>
         )}
         {messages.map((msg, idx) => (
           <div key={idx} className="flex items-start gap-2">
@@ -142,13 +159,17 @@ const CopilotBar = () => {
       {/* Bottom Input Area */}
       <div className="w-full max-w-md mx-auto px-2">
         <div className="text-left mb-2">
-          <button className="text-sm bg-gray-100 text-gray-700 px-3 py-2 rounded-full shadow hover:bg-gray-200">
+          <button
+            className="text-sm bg-gray-100 text-gray-700 px-3 py-2 rounded-full shadow hover:bg-gray-200"
+            onClick={handlePresetQuestion}
+            disabled={loading}
+          >
             🧾 How do I get a refund?
           </button>
         </div>
         <div
           className="w-full bg-white border-none outline-none rounded-lg shadow-inner flex items-center gap-3
-    focus-within:ring-2 focus-within:ring-[#625FC7] focus-within:ring-offset-0"
+          focus-within:ring-2 focus-within:ring-[#625FC7] focus-within:ring-offset-0"
         >
           <textarea
             type="text"
